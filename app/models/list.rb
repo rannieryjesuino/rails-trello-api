@@ -4,6 +4,9 @@ class List < ApplicationRecord
 
   validates_presence_of :name
 
+# Normalmente colocaria-se um dependent: :destroy no has_many, porem dessa forma
+# ao perder a referencia aos cards eles seriam automaticamente deletados, entao
+# necessita-se fazer desta forma
   before_destroy :delete_cards
 
   def delete_cards
