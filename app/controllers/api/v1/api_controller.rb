@@ -1,5 +1,6 @@
 module Api::V1
  
+#  Controlador "geral" da v1 da API, para nao misturar com o controlador geral da API (application_controller).
  class ApiController < ApplicationController
  
     acts_as_token_authentication_handler_for User
