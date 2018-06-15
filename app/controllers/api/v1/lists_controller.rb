@@ -59,9 +59,16 @@ class Api::V1::ListsController < Api::V1::ApiController
       # Caso seja fornecido um id de alguma lista, antes de ser destruída todos os cards serão transferidos.
         if params.has_key?(:list_id)
           id = params.fetch(:list_id)
+          transfer_list = List.find(id)
+
           @list.cards.each do |card|
-              card.update list_id: id
+              card.list = transfer_list
+              card.save
           end
+
+          # Limpando a lista de cards da lista, para que não sejam deletados quando a mesma for deletada
+          @list.cards = []
+          @list.save
         end
 
         @list.destroy
