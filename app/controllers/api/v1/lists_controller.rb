@@ -60,6 +60,11 @@ class Api::V1::ListsController < Api::V1::ApiController
         if params.has_key?(:list_id)
           id = params.fetch(:list_id)
           transfer_list = List.find(id)
+          
+          if(@list.board_diferente(id))
+              render json: {errors: "Não é possível mudar as atividades para uma lista em um quadro diferente!"}
+              return
+          end
 
           @list.cards.each do |card|
               card.list = transfer_list
@@ -72,6 +77,7 @@ class Api::V1::ListsController < Api::V1::ApiController
         end
 
         @list.destroy
+        render json: {message: "Lista deletada com sucesso!"}
 
     end
 

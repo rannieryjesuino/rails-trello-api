@@ -14,4 +14,9 @@ class List < ApplicationRecord
       card.destroy
     end
   end
+  
+  def board_diferente(id)
+    transfer_list = List.find(id)
+    self.board != transfer_list.board ? true : false
+  end
 end

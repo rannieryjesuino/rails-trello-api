@@ -57,6 +57,7 @@ class Api::V1::BoardsController < Api::V1::ApiController
     def destroy
 
         @board.destroy
+        render json: {message: "Quadro deletado com sucesso!"}
 
     end
 

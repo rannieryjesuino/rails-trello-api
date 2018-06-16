@@ -40,7 +40,7 @@ class Api::V1::CardsController < Api::V1::ApiController
 
     def update
 
-        if board_diferente
+        if @card.list.board_diferente(card_params[:list_id])
           render json: {errors: "Não é possível mudar a atividade para um quadro diferente!"}
           return
         end
@@ -62,6 +62,7 @@ class Api::V1::CardsController < Api::V1::ApiController
     def destroy
 
         @card.destroy
+        render json: {message: "Atividade deletada com sucesso!"}
 
     end
 
@@ -77,10 +78,6 @@ class Api::V1::CardsController < Api::V1::ApiController
 
             params.require(:card).permit(:name, :desc, :list_id)
 
-        end
-
-        def board_diferente
-            @card.list.board != List.find(card_params[:list_id]).board ? true : false
         end
 
 end
