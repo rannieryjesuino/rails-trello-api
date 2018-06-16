@@ -2,6 +2,8 @@ class Api::V1::CardsController < Api::V1::ApiController
 
     before_action :set_card, only: [:show, :update, :destroy]
 
+    # GET /v1/cards
+
     def index
 
         @cards = Card.all

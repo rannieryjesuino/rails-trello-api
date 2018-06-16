@@ -2,6 +2,8 @@ class Api::V1::BoardsController < Api::V1::ApiController
 
     before_action :set_board, only: [:show, :update, :destroy]
 
+    # GET /v1/boards
+
     def index
 
         @boards = Board.all
